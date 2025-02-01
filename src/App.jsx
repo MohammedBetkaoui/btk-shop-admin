@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './Components/sidebar/sidebar';
-import Addproduct from './Components/addProduct/AddProduct'
+import Addproduct from './Components/addProduct/AddProduct';
 import ListProduct from './Components/listproduct/listproduct';
 import './index.css';
 

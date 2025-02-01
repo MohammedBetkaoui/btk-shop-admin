@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './addproduct.css';
 
-const AddProduct = () => {
+const Addproduct = () => {
   const [product, setProduct] = useState({
     name: '',
     category: '',
@@ -79,4 +79,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default Addproduct;
