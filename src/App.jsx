@@ -15,7 +15,7 @@ const App = () => {
           <Routes>
             <Route path="/addproduct" element={<Addproduct />} />
             <Route path="/listproduct" element={<ListProduct />} />
-            <Route path="/" element={<Addproduct />} /> {/* Par défaut, redirige vers AddProduct */}
+            <Route path="/" element={<Addproduct />} /> 
           </Routes>
         </div>
       </div>

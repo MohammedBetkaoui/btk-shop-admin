@@ -1,84 +1,61 @@
-/* Styles modernisés pour AddProduct */
 .add-product-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
-    padding: 25px;
-    background: linear-gradient(135deg, #ffffff, #f3f4f6);
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease-in-out;
-}
-
-.add-product-container:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.add-product-container h2 {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-product-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #2c3e50;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
     margin-bottom: 5px;
-    font-weight: 600;
-    color: #34495e;
-    font-size: 14px;
-}
-
-.form-group input {
+    font-weight: bold;
+  }
+  
+  .form-group input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 16px;
-    transition: border-color 0.3s ease-in-out;
-}
-
-.form-group input:focus {
-    border-color: #2c3e50;
-    outline: none;
-}
-
-button {
+  }
+  
+  button {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     background-color: #2c3e50;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease-in-out;
-}
-
-button:hover {
-    background-color: #1a252f;
-}
-
-/* Amélioration pour mobile */
-@media (max-width: 768px) {
+  }
+  
+  button:hover {
+    background-color: #34495e;
+  }
+  
+  @media (max-width: 768px) {
     .add-product-container {
-        margin: 20px;
-        padding: 20px;
+      margin: 20px;
+      padding: 15px;
     }
-
+  
     .form-group input {
-        font-size: 14px;
-        padding: 10px;
+      font-size: 14px;
     }
-
+  
     button {
-        font-size: 14px;
-        padding: 10px;
+      font-size: 14px;
     }
-}
+  }
