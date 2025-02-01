@@ -9,6 +9,7 @@ const Addproduct = () => {
     new_price: '',
     old_price: '',
     image: null,
+    description: '', // Ajout de la description
   });
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -34,6 +35,7 @@ const Addproduct = () => {
     formData.append('new_price', product.new_price);
     formData.append('old_price', product.old_price);
     formData.append('image', product.image);
+    formData.append('description', product.description); // Ajout de la description
 
     try {
       await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
@@ -48,6 +50,7 @@ const Addproduct = () => {
         new_price: '',
         old_price: '',
         image: null,
+        description: '', // Réinitialiser la description
       });
       setImagePreview(null); // Réinitialiser l'aperçu
     } catch (error) {
@@ -87,6 +90,18 @@ const Addproduct = () => {
         <div className="form-group">
           <label>New Price <span className="span">*</span></label>
           <input type="number" name="new_price" value={product.new_price} onChange={handleChange} placeholder="e.g., 23" required />
+        </div>
+
+        <div className="form-group">
+          <label>Description <span className="span">*</span></label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            required
+            rows="4"
+            placeholder="Enter product description"
+          />
         </div>
 
         <div className="form-group">

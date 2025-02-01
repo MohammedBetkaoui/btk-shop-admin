@@ -43,13 +43,17 @@ label {
 }
 
 /* Inputs */
-input[type="text"], input[type="number"], input[type="file"] {
+input[type="text"], input[type="number"], input[type="file"], textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+}
+
+textarea {
+  resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement */
 }
 
 /* Boutons radio */
@@ -130,7 +134,7 @@ button:hover {
       font-size: 13px;
   }
 
-  input[type="text"], input[type="number"], input[type="file"], button {
+  input[type="text"], input[type="number"], input[type="file"], textarea, button {
       font-size: 14px;
       padding: 8px;
   }
@@ -158,7 +162,7 @@ button:hover {
       font-size: 12px;
   }
 
-  input[type="text"], input[type="number"], input[type="file"], button {
+  input[type="text"], input[type="number"], input[type="file"], textarea, button {
       font-size: 12px;
       padding: 6px;
   }
