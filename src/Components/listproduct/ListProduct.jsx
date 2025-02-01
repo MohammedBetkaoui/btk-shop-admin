@@ -43,11 +43,7 @@ const ListProduct = () => {
               className="product-image"
               onClick={() => setLightboxImage(product.image)}
             />
-            {/* Métadonnées de l'image */}
-            <div className="image-details">
-              <p><strong>Filename:</strong> {product.image.split('/').pop()}</p>
-              <p><strong>Format:</strong> {product.image.split('.').pop().toUpperCase()}</p>
-            </div>
+           
 
             {/* Détails du produit */}
             <div className="product-details">
