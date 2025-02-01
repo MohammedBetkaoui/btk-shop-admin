@@ -4,6 +4,7 @@ import './listProduct.css';
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,19 +36,42 @@ const ListProduct = () => {
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
+            {/* Affichage de l'image */}
+            <img
+              src={product.image}
+              alt={product.name}
+              className="product-image"
+              onClick={() => setLightboxImage(product.image)}
+            />
+            {/* Métadonnées de l'image */}
+            <div className="image-details">
+              <p><strong>Filename:</strong> {product.image.split('/').pop()}</p>
+              <p><strong>Format:</strong> {product.image.split('.').pop().toUpperCase()}</p>
+            </div>
+
+            {/* Détails du produit */}
             <div className="product-details">
               <h3>{product.name}</h3>
               <p><strong>Category:</strong> {product.category}</p>
               <p><strong>New Price:</strong> ${product.new_price}</p>
               <p><strong>Old Price:</strong> ${product.old_price}</p>
             </div>
+
+            {/* Bouton supprimer */}
             <button className="delete-button" onClick={() => handleDelete(product.id)}>
               Delete
             </button>
           </div>
         ))}
       </div>
+
+      {/* Lightbox pour afficher l'image en grand */}
+      {lightboxImage && (
+        <div className="lightbox active" onClick={() => setLightboxImage(null)}>
+          <span className="close-lightbox">&times;</span>
+          <img src={lightboxImage} alt="Full View" />
+        </div>
+      )}
     </div>
   );
 };

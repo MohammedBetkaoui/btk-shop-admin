@@ -11,13 +11,19 @@ const Addproduct = () => {
     image: null,
   });
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
 
   const handleImageChange = (e) => {
-    setProduct({ ...product, image: e.target.files[0] });
+    const file = e.target.files[0];
+    if (file) {
+      setProduct({ ...product, image: file });
+      setImagePreview(URL.createObjectURL(file)); // Générer un aperçu de l'image
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -43,6 +49,7 @@ const Addproduct = () => {
         old_price: '',
         image: null,
       });
+      setImagePreview(null); // Réinitialiser l'aperçu
     } catch (error) {
       console.error('Error adding product:', error);
       alert('Error adding product');
@@ -55,11 +62,12 @@ const Addproduct = () => {
       <p>Please fill out the form to add a new product to your store.</p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Product Title <span>*</span></label>
+          <label>Product Title <span className="span">*</span></label>
           <input type="text" name="name" value={product.name} onChange={handleChange} required />
         </div>
-        
-        <label>Category <span>*</span></label>
+        <br />
+        <label>Category <span className="span">*</span></label>
+        <br />
         <div className="radio-group">
           <input type="radio" id="men" name="category" value="Men" onChange={handleChange} required />
           <label htmlFor="men">Men</label>
@@ -72,25 +80,31 @@ const Addproduct = () => {
         </div>
 
         <div className="form-group">
-          <label>Old Price <span>*</span></label>
+          <label>Old Price <span className="span">*</span></label>
           <input type="number" name="old_price" value={product.old_price} onChange={handleChange} placeholder="e.g., 23" required />
         </div>
 
         <div className="form-group">
-          <label>New Price <span>*</span></label>
+          <label>New Price <span className="span">*</span></label>
           <input type="number" name="new_price" value={product.new_price} onChange={handleChange} placeholder="e.g., 23" required />
         </div>
 
         <div className="form-group">
-          <label>Upload Product Image <span>*</span></label>
+          <label>Upload Product Image <span className="span">*</span></label>
           <div className="file-upload">
-            <input type="file" name="image" onChange={handleImageChange} required />
-            <span>Upload a File</span>
-            <p>Drag and drop files here</p>
+            <input type="file" name="image" accept="image/*" onChange={handleImageChange} required />
+            {imagePreview ? (
+              <img src={imagePreview} alt="Preview" className="image-preview" />
+            ) : (
+              <>
+                <span>Upload a File</span>
+                <p>Drag and drop files here</p>
+              </>
+            )}
           </div>
         </div>
 
-        <button type="submit">Add</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
