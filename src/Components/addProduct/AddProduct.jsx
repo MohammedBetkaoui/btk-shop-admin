@@ -30,7 +30,7 @@ const Addproduct = () => {
     formData.append('image', product.image);
 
     try {
-      const response = await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
+      await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -51,29 +51,46 @@ const Addproduct = () => {
 
   return (
     <div className="add-product-container">
-      <h2>Add Product</h2>
+      <h2>Product Addition Form</h2>
+      <p>Please fill out the form to add a new product to your store.</p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Name</label>
+          <label>Product Title <span>*</span></label>
           <input type="text" name="name" value={product.name} onChange={handleChange} required />
         </div>
-        <div className="form-group">
-          <label>Category</label>
-          <input type="text" name="category" value={product.category} onChange={handleChange} required />
+        
+        <label>Category <span>*</span></label>
+        <div className="radio-group">
+          <input type="radio" id="men" name="category" value="Men" onChange={handleChange} required />
+          <label htmlFor="men">Men</label>
+
+          <input type="radio" id="women" name="category" value="Women" onChange={handleChange} />
+          <label htmlFor="women">Women</label>
+
+          <input type="radio" id="kids" name="category" value="Kids" onChange={handleChange} />
+          <label htmlFor="kids">Kids</label>
         </div>
+
         <div className="form-group">
-          <label>New Price</label>
-          <input type="number" name="new_price" value={product.new_price} onChange={handleChange} required />
+          <label>Old Price <span>*</span></label>
+          <input type="number" name="old_price" value={product.old_price} onChange={handleChange} placeholder="e.g., 23" required />
         </div>
+
         <div className="form-group">
-          <label>Old Price</label>
-          <input type="number" name="old_price" value={product.old_price} onChange={handleChange} required />
+          <label>New Price <span>*</span></label>
+          <input type="number" name="new_price" value={product.new_price} onChange={handleChange} placeholder="e.g., 23" required />
         </div>
+
         <div className="form-group">
-          <label>Image</label>
-          <input type="file" name="image" onChange={handleImageChange} required />
+          <label>Upload Product Image <span>*</span></label>
+          <div className="file-upload">
+            <input type="file" name="image" onChange={handleImageChange} required />
+            <span>Upload a File</span>
+            <p>Drag and drop files here</p>
+          </div>
         </div>
-        <button type="submit">Add Product</button>
+
+        <button type="submit">Add</button>
       </form>
     </div>
   );
