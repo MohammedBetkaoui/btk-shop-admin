@@ -1,224 +1,389 @@
-/* Conteneur principal */
+/* Base styles */
 .add-product-container {
-  background: #fff;
+  max-width: 800px;
+  margin: 50px auto;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 500px;
-  margin: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-container h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
   text-align: center;
 }
 
-/* Titre et description */
-h2 {
-  margin-bottom: 5px;
-  font-size: 22px;
-}
-
-p {
-  font-size: 14px;
+.add-product-container p {
+  font-size: 1rem;
   color: #666;
-}
-
-/* Formulaire */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Champs du formulaire */
-.form-group {
-  margin-top: 10px;
-  text-align: left;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-}
-
-.span {
-  color: red;
-}
-
-/* Inputs */
-input[type="text"], input[type="number"], input[type="file"], textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-textarea {
-  resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement */
-}
-
-/* Boutons radio */
-.radio-group {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 5px 0;
-}
-
-input[type="radio"] {
-  margin-left: 70px;
-}
-
-/* Upload file */
-.file-upload {
-  border: 2px dashed #ccc;
-  padding: 15px;
   text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  color: #555;
-  position: relative;
-  width: 100%;
-  min-height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  margin-bottom: 30px;
 }
 
-/* Effet hover */
-.file-upload:hover {
-  border-color: #007bff;
-}
-
-/* Affichage de l'image sélectionnée */
-.image-preview {
-  width: 100%;
-  height: auto;
-  max-height: 300px; /* Limite la hauteur */
-  object-fit: contain; /* Assure que l'image garde son ratio */
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-/* Bouton */
-button {
-  background: #28a745;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: #218838;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .add-product-container {
-      width: 95%;
-      padding: 15px;
-  }
-  
-  h2 {
-      font-size: 20px;
-  }
-
-  p {
-      font-size: 13px;
-  }
-
-  input[type="text"], input[type="number"], input[type="file"], textarea, button {
-      font-size: 14px;
-      padding: 8px;
-  }
-
-  .file-upload {
-      min-height: 150px;
-  }
-
-  .image-preview {
-      max-height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .add-product-container {
-      width: 100%;
-      padding: 10px;
-  }
-
-  h2 {
-      font-size: 18px;
-  }
-
-  p {
-      font-size: 12px;
-  }
-
-  input[type="text"], input[type="number"], input[type="file"], textarea, button {
-      font-size: 12px;
-      padding: 6px;
-  }
-
-  .file-upload {
-      min-height: 120px;
-  }
-
-  .image-preview {
-      max-height: 200px;
-  }
-}
-/* Alertes */
+/* Alert styles */
 .alert {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 20px;
-  font-size: 16px;
+  padding: 15px;
+  margin-bottom: 20px;
   border-radius: 5px;
   text-align: center;
-  z-index: 1000;
-  animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 2.5s forwards;
-  width: 80%;
-  max-width: 400px;
+  font-size: 1rem;
 }
 
 .alert.success {
-  background: #28a745;
-  color: #fff;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
 }
 
 .alert.error {
-  background: #dc3545;
-  color: #fff;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.span {
+  color: #e74c3c;
+}
+
+
+/* File upload styles */
+.file-upload {
+  border: 2px dashed #3498db;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload:hover {
+  background-color: #f0f0f0;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload span {
+  font-size: 1rem;
+  color: #3498db;
+  font-weight: 500;
+}
+
+.file-upload p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* .btn styles */
+.btn {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .add-product-container {
+    margin: 20px;
+    padding: 15px;
   }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+
+  .add-product-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .add-product-container p {
+    font-size: 0.9rem;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .file-upload {
+    padding: 15px;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+/* iPhone 5/SE */
+@media (max-width: 320px) {
+  .add-product-container {
+    margin: 10px;
+    padding: 10px;
   }
-  to {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+
+  .add-product-container h2 {
+    font-size: 1.5rem;
   }
+
+  .add-product-container p {
+    font-size: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .file-upload {
+    padding: 10px;
+  }
+
+  .file-upload span {
+    font-size: 0.9rem;
+  }
+
+  .file-upload p {
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* iPhone 12 Mini */
+@media (max-width: 375px) {
+  .add-product-container {
+    margin: 15px;
+    padding: 12px;
+  }
+
+  .add-product-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .add-product-container p {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 9px;
+    font-size: 0.95rem;
+  }
+
+  .file-upload {
+    padding: 12px;
+  }
+
+  .file-upload span {
+    font-size: 0.95rem;
+  }
+
+  .file-upload p {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 11px;
+    font-size: 0.95rem;
+  }
+}
+
+/* iPhone 13 Pro Max */
+@media (max-width: 428px) {
+  .add-product-container {
+    margin: 18px;
+    padding: 14px;
+  }
+
+  .add-product-container h2 {
+    font-size: 1.7rem;
+  }
+
+  .add-product-container p {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .file-upload {
+    padding: 14px;
+  }
+
+  .file-upload span {
+    font-size: 1rem;
+  }
+
+  .file-upload p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Samsung Galaxy S8, S9, S10, etc. */
+@media (max-width: 360px) {
+  .add-product-container {
+    margin: 12px;
+    padding: 10px;
+  }
+
+  .add-product-container h2 {
+    font-size: 1.55rem;
+  }
+
+  .add-product-container p {
+    font-size: 0.82rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+    font-size: 0.92rem;
+  }
+
+  .file-upload {
+    padding: 10px;
+  }
+
+  .file-upload span {
+    font-size: 0.92rem;
+  }
+
+  .file-upload p {
+    font-size: 0.82rem;
+  }
+
+  .btn {
+    padding: 10px;
+    font-size: 0.92rem;
+  }
+}
+
+/* Samsung Galaxy S20, S21, etc. */
+@media (max-width: 412px) {
+  .add-product-container {
+    margin: 16px;
+    padding: 12px;
+  }
+
+  .add-product-container h2 {
+    font-size: 1.65rem;
+  }
+
+  .add-product-container p {
+    font-size: 0.88rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 9px;
+    font-size: 0.98rem;
+  }
+
+  .file-upload {
+    padding: 12px;
+  }
+
+  .file-upload span {
+    font-size: 0.98rem;
+  }
+
+  .file-upload p {
+    font-size: 0.88rem;
+  }
+
+  .btn {
+    padding: 11px;
+    font-size: 0.98rem;
+  }
+}
+/* Styles pour le select */
+select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  transition: border-color 0.3s ease;
+  width: 100%; /* Prend toute la largeur disponible */
+}
+
+select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Style pour les options */
+select option {
+  padding: 10px;
+  font-size: 1rem;
 }

@@ -1,37 +1,40 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';  // Importation nommée
+import { AuthContext } from '../../context/AuthContext';
 import './LoginForm.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useContext(AuthContext);
+  const { isAuthenticated, login } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Rediriger vers addproduct si l'admin est déjà connecté
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/addproduct');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    console.log("Username:", username);  // Vérifier les valeurs
-    console.log("Password:", password);
-  
     try {
       const response = await axios.post('https://backend-btk-shop.onrender.com/login', {
         username,
         password,
       });
-  
+
       if (response.data.success) {
-        login(response.data.token); // Enregistre le token dans le contexte et le localStorage
-        navigate('/addproduct'); // Redirige vers la page d'ajout de produit
+        login(response.data.token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        navigate('/addproduct');
       }
     } catch (error) {
       console.error('Erreur lors de la connexion :', error);
       alert('Identifiants invalides');
     }
   };
-  
 
   return (
     <div className="login-container">

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaPlus, FaList } from 'react-icons/fa';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaPlus, FaList, FaSignOutAlt } from 'react-icons/fa';
+import { AuthContext } from '../../context/AuthContext';
 import './sidebar.css';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { isAuthenticated, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +28,11 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirige vers la page de connexion après la déconnexion
+  };
+
   return (
     <>
       <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -42,6 +50,14 @@ const Sidebar = () => {
               {isOpen && <span>List Product</span>}
             </Link>
           </li>
+          {isAuthenticated && (
+            <li>
+              <button onClick={handleLogout} className="logout-button">
+                <FaSignOutAlt className="icon" />
+                {isOpen && <span>Logout</span>}
+              </button>
+            </li>
+          )}
         </ul>
       </div>
       {isMobile && (

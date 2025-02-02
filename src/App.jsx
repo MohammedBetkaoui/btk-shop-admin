@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; // AuthProvider seul ici
+import { AuthProvider } from './context/AuthContext';
 import Sidebar from './Components/sidebar/sidebar';
 import Addproduct from './Components/addProduct/AddProduct';
 import ListProduct from './Components/listproduct/ListProduct';
 import LoginForm from './Components/login/LoginForm';
-import { useAuth } from './context/AuthContext'; // ou le chemin correct vers votre fichier de contexte
+import { useAuth } from './context/AuthContext';
 
 import './index.css';
 

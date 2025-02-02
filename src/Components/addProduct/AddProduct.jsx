@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './addproduct.css';
 
 const Addproduct = () => {
   const [product, setProduct] = useState({
     name: '',
-    category: '',
+    category: '', // La catégorie est maintenant une chaîne de caractères
     new_price: '',
     old_price: '',
     image: null,
@@ -14,6 +14,9 @@ const Addproduct = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [alert, setAlert] = useState({ message: '', type: '' });
+
+  // Référence pour l'élément input de type file
+  const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +29,11 @@ const Addproduct = () => {
       setProduct({ ...product, image: file });
       setImagePreview(URL.createObjectURL(file));
     }
+  };
+
+  // Gestionnaire de clic pour la div file-upload
+  const handleFileUploadClick = () => {
+    fileInputRef.current.click(); // Déclenche le clic sur l'input file
   };
 
   const handleSubmit = async (e) => {
@@ -42,6 +50,7 @@ const Addproduct = () => {
       await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 
@@ -49,7 +58,7 @@ const Addproduct = () => {
 
       setProduct({
         name: '',
-        category: '',
+        category: '', // Réinitialiser la catégorie
         new_price: '',
         old_price: '',
         image: null,
@@ -61,7 +70,6 @@ const Addproduct = () => {
       setAlert({ message: 'Error adding product!', type: 'error' });
     }
 
-    // Effacer l'alerte après 3 secondes
     setTimeout(() => {
       setAlert({ message: '', type: '' });
     }, 3000);
@@ -83,16 +91,19 @@ const Addproduct = () => {
           <input type="text" name="name" value={product.name} onChange={handleChange} required />
         </div>
 
-        <label>Category <span className="span">*</span></label>
-        <div className="radio-group">
-          <input type="radio" id="men" name="category" value="Men" onChange={handleChange} required />
-          <label htmlFor="men">Men</label>
-
-          <input type="radio" id="women" name="category" value="Women" onChange={handleChange} />
-          <label htmlFor="women">Women</label>
-
-          <input type="radio" id="kids" name="category" value="Kids" onChange={handleChange} />
-          <label htmlFor="kids">Kids</label>
+        <div className="form-group">
+          <label>Category <span className="span">*</span></label>
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>Select a category</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+          </select>
         </div>
 
         <div className="form-group">
@@ -119,8 +130,16 @@ const Addproduct = () => {
 
         <div className="form-group">
           <label>Upload Product Image <span className="span">*</span></label>
-          <div className="file-upload">
-            <input type="file" name="image" accept="image/*" onChange={handleImageChange} required />
+          <div className="file-upload" onClick={handleFileUploadClick}>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              required
+            />
             {imagePreview ? (
               <img src={imagePreview} alt="Preview" className="image-preview" />
             ) : (
@@ -132,7 +151,7 @@ const Addproduct = () => {
           </div>
         </div>
 
-        <button type="submit">Submit</button>
+        <button className='btn' type="submit">Submit</button>
       </form>
     </div>
   );

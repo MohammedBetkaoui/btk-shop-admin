@@ -1,96 +1,224 @@
-/* Global styles */
+/* LoginForm.css */
 
- 
-  
-  /* Container */
+/* Base styles */
+
   .login-container {
-    background-color: #fff;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
+    height: 100%;
+    background: linear-gradient(135deg, #f6f3f8 0%, #05255c 100%);
+    animation: gradientBG 15s ease infinite;
+  }
+  
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
   
   .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Form Title */
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #2d3e50;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  /* Input fields */
-  .form-group {
+    background: linear-gradient(135deg, #92d0ff 0%, #d1d2d2 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
-    margin-bottom: 20px;
+    max-width: 400px;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .login-form h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
   }
   
   .form-group label {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 5px;
     display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #555;
   }
   
   .form-group input {
     width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    transition: all 0.3s ease-in-out;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
   }
   
   .form-group input:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+    border-color: #6a11cb;
+    outline: none;
   }
   
-  /* Button */
   .submit-btn {
-    background-color: #0056b3;
-    color: #fff;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
     width: 100%;
+    padding: 0.75rem;
+    background-color: #6a11cb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .submit-btn:hover {
-    background-color: #003d80;
+    background-color: #2575fc;
   }
   
-  .submit-btn:active {
-    transform: scale(0.98);
-  }
-  
-  /* Responsive design */
-  @media (max-width: 500px) {
-    .login-container {
-      padding: 30px 20px;
-    }
-  
+  /* Responsive styles */
+  @media (max-width: 768px) {
     .login-form {
-      width: 100%;
+      padding: 1.5rem;
+      margin-top: 95px;
+    }
+    .login-container{
+        padding: 0;
+        margin-top: 0;
+
+        background: white;
+    }
+   
+  
+    .login-form h2 {
+      font-size: 1.75rem;
+    }
+  
+    .form-group input {
+      padding: 0.5rem;
+      margin-left: -11px;
+    }
+  
+    .submit-btn {
+      padding: 0.5rem;
     }
   }
-  .message {
-    margin-top: 1rem;
-    text-align: center;
-    color: #007bff;
-    font-weight: bold;
+  
+  @media (max-width: 480px) {
+    .login-form {
+      padding: 1rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.5rem;
+    }
+  
+    .form-group input {
+      padding: 0.5rem;
+    }
+  
+    .submit-btn {
+      padding: 0.5rem;
+    }
   }
   
+  /* Specific device adjustments */
+  /* iPhone 5/SE */
+  @media (max-width: 320px) {
+    .login-form {
+      padding: 0.75rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.25rem;
+    }
+  
+    .form-group input {
+      padding: 0.4rem;
+    }
+  
+    .submit-btn {
+      padding: 0.4rem;
+    }
+  }
+  
+  /* iPhone 12 Mini */
+  @media (max-width: 375px) {
+    .login-form {
+      padding: 1rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.5rem;
+    }
+  
+    .form-group input {
+      padding: 0.5rem;
+    }
+  
+    .submit-btn {
+      padding: 0.5rem;
+    }
+  }
+  
+  /* iPhone 13 Pro Max */
+  @media (max-width: 428px) {
+    .login-form {
+      padding: 1.5rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.75rem;
+    }
+  
+    .form-group input {
+      padding: 0.75rem;
+    }
+  
+    .submit-btn {
+      padding: 0.75rem;
+    }
+  }
+  
+  /* Samsung Galaxy S8+ */
+  @media (max-width: 360px) {
+    .login-form {
+      padding: 1rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.5rem;
+    }
+  
+    .form-group input {
+      padding: 0.5rem;
+    }
+  
+    .submit-btn {
+      padding: 0.5rem;
+    }
+  }
+  
+  /* Samsung Galaxy S20 Ultra */
+  @media (max-width: 412px) {
+    .login-form {
+      padding: 1.5rem;
+    }
+  
+    .login-form h2 {
+      font-size: 1.75rem;
+    }
+  
+    .form-group input {
+      padding: 0.75rem;
+    }
+  
+    .submit-btn {
+      padding: 0.75rem;
+    }
+  }
