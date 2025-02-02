@@ -1,35 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';  // Importation nommée
 import './LoginForm.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    console.log("Username:", username);  // Vérifier les valeurs
+    console.log("Password:", password);
+  
     try {
-      const response = await fetch('https://backend-btk-shop.onrender.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post('https://backend-btk-shop.onrender.com/login', {
+        username,
+        password,
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setMessage('Connexion réussie !');
-      } else {
-        setMessage('Identifiants incorrects.');
+  
+      if (response.data.success) {
+        login(response.data.token); // Enregistre le token dans le contexte et le localStorage
+        navigate('/addproduct'); // Redirige vers la page d'ajout de produit
       }
     } catch (error) {
       console.error('Erreur lors de la connexion :', error);
-      setMessage('Erreur lors de la connexion. Veuillez réessayer.');
+      alert('Identifiants invalides');
     }
   };
+  
 
   return (
     <div className="login-container">
@@ -56,7 +58,6 @@ const LoginForm = () => {
           />
         </div>
         <button type="submit" className="submit-btn">Se connecter</button>
-        {message && <p className="message">{message}</p>}
       </form>
     </div>
   );
