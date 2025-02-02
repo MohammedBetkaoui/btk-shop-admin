@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import './listProduct.css';
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,13 +21,25 @@ const ListProduct = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await axios.post('https://backend-btk-shop.onrender.com/removeproduct', { id });
-      setProducts(products.filter(product => product.id !== id));
-      alert('Product deleted successfully!');
-    } catch (error) {
-      console.error('Error deleting product:', error);
-      alert('Error deleting product');
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you really want to delete this product?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.post('https://backend-btk-shop.onrender.com/removeproduct', { id });
+        setProducts(products.filter(product => product.id !== id));
+        Swal.fire('Deleted!', 'The product has been deleted.', 'success');
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        Swal.fire('Error', 'Failed to delete the product.', 'error');
+      }
     }
   };
 
@@ -35,7 +49,12 @@ const ListProduct = () => {
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
+            <img
+              src={product.image}
+              alt={product.name}
+              className="product-image"
+              onClick={() => setSelectedImage(product.image)}
+            />
             <div className="product-details">
               <h3>{product.name}</h3>
               <p><strong>Category:</strong> {product.category}</p>
@@ -48,6 +67,13 @@ const ListProduct = () => {
           </div>
         ))}
       </div>
+
+      {selectedImage && (
+        <div className="lightbox active" onClick={() => setSelectedImage(null)}>
+          <img src={selectedImage} alt="Product" />
+          <button className="close-lightbox" onClick={() => setSelectedImage(null)}>X</button>
+        </div>
+      )}
     </div>
   );
 };

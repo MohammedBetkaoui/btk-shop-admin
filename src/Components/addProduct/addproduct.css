@@ -175,3 +175,50 @@ button:hover {
       max-height: 200px;
   }
 }
+/* Alertes */
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 2.5s forwards;
+  width: 80%;
+  max-width: 400px;
+}
+
+.alert.success {
+  background: #28a745;
+  color: #fff;
+}
+
+.alert.error {
+  background: #dc3545;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+}

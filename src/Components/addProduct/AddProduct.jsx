@@ -9,10 +9,11 @@ const Addproduct = () => {
     new_price: '',
     old_price: '',
     image: null,
-    description: '', // Ajout de la description
+    description: '',
   });
 
   const [imagePreview, setImagePreview] = useState(null);
+  const [alert, setAlert] = useState({ message: '', type: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +24,7 @@ const Addproduct = () => {
     const file = e.target.files[0];
     if (file) {
       setProduct({ ...product, image: file });
-      setImagePreview(URL.createObjectURL(file)); // Générer un aperçu de l'image
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
@@ -35,7 +36,7 @@ const Addproduct = () => {
     formData.append('new_price', product.new_price);
     formData.append('old_price', product.old_price);
     formData.append('image', product.image);
-    formData.append('description', product.description); // Ajout de la description
+    formData.append('description', product.description);
 
     try {
       await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
@@ -43,24 +44,37 @@ const Addproduct = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('Product added successfully!');
+
+      setAlert({ message: 'Product added successfully!', type: 'success' });
+
       setProduct({
         name: '',
         category: '',
         new_price: '',
         old_price: '',
         image: null,
-        description: '', // Réinitialiser la description
+        description: '',
       });
-      setImagePreview(null); // Réinitialiser l'aperçu
+      setImagePreview(null);
     } catch (error) {
       console.error('Error adding product:', error);
-      alert('Error adding product');
+      setAlert({ message: 'Error adding product!', type: 'error' });
     }
+
+    // Effacer l'alerte après 3 secondes
+    setTimeout(() => {
+      setAlert({ message: '', type: '' });
+    }, 3000);
   };
 
   return (
     <div className="add-product-container">
+      {alert.message && (
+        <div className={`alert ${alert.type}`}>
+          {alert.message}
+        </div>
+      )}
+
       <h2>Product Addition Form</h2>
       <p>Please fill out the form to add a new product to your store.</p>
       <form onSubmit={handleSubmit}>
@@ -68,9 +82,8 @@ const Addproduct = () => {
           <label>Product Title <span className="span">*</span></label>
           <input type="text" name="name" value={product.name} onChange={handleChange} required />
         </div>
-        <br />
+
         <label>Category <span className="span">*</span></label>
-        <br />
         <div className="radio-group">
           <input type="radio" id="men" name="category" value="Men" onChange={handleChange} required />
           <label htmlFor="men">Men</label>
