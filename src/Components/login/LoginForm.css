@@ -1,0 +1,96 @@
+/* Global styles */
+
+ 
+  
+  /* Container */
+  .login-container {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Form Title */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2d3e50;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Input fields */
+  .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-group input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+  }
+  
+  /* Button */
+  .submit-btn {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .submit-btn:hover {
+    background-color: #003d80;
+  }
+  
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 500px) {
+    .login-container {
+      padding: 30px 20px;
+    }
+  
+    .login-form {
+      width: 100%;
+    }
+  }
+  .message {
+    margin-top: 1rem;
+    text-align: center;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
