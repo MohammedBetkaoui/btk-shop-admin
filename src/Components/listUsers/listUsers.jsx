@@ -35,26 +35,28 @@ const ListUser = () => {
       <h1>Liste des Utilisateurs</h1>
       
       {/* Version Desktop */}
-      <table className="user-table desktop-view">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nom d'utilisateur</th>
-            <th>Email</th>
-            <th>Date d'inscription</th>
+      <div className="table-container">
+    <table className="user-table desktop-view">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom d'utilisateur</th>
+          <th>Email</th>
+          <th>Date d'inscription</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user) => (
+          <tr key={user._id}>
+            <td className="user-id">{user._id}</td>
+            <td>{user.username}</td>
+            <td className="email-cell">{user.email}</td>
+            <td>{new Date(user.createdAt).toLocaleDateString()}</td>
           </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user._id}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        ))}
+      </tbody>
+    </table>
+  </div>
 
       {/* Version Mobile */}
       <div className="mobile-view">
