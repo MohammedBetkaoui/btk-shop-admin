@@ -59,7 +59,7 @@ const ListUser = () => {
 
   return (
     <div className="list-user-container">
-      <h1>Gestion des Utilisateurs (Temps réel)</h1>
+      <h1>Gestion des Utilisateurs </h1>
       
       {/* Version Desktop */}
       <table className="user-table desktop-view">
