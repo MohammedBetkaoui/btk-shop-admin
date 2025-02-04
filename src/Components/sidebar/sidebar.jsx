@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaPlus, FaList, FaSignOutAlt } from 'react-icons/fa';
+import { FaPlus, FaList, FaSignOutAlt, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import './sidebar.css';
 
@@ -12,58 +12,71 @@ const Sidebar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setIsOpen(!mobile);
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleLogout = () => {
     logout();
-    navigate('/login'); // Redirige vers la page de connexion après la déconnexion
+    navigate('/login');
   };
 
   return (
     <>
-      <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-        <h2>{isOpen ? 'Admin Panel' : '☰'}</h2>
-        <ul>
+      <nav className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+        <div className="sidebar-header">
+          <h2>Admin Panel</h2>
+          {isMobile && (
+            <button className="close-button" onClick={toggleMenu}>
+              <FaTimes />
+            </button>
+          )}
+        </div>
+        
+        <ul className="menu-items">
           <li>
-            <Link to="/addproduct">
-              <FaPlus className="icon" />
-              {isOpen && <span>Add Product</span>}
+            <Link to="/addproduct" className="menu-link">
+              <FaPlus className="icons" />
+              <span>Add Product</span>
             </Link>
           </li>
           <li>
-            <Link to="/listproduct">
-              <FaList className="icon" />
-              {isOpen && <span>List Product</span>}
+            <Link to="/listproduct" className="menu-link">
+              <FaList className="icons" />
+              <span>List Product</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/listUsers" className="menu-link">
+              <FaList className="icons" />
+              <span>List Users</span>
             </Link>
           </li>
           {isAuthenticated && (
             <li>
-              <button onClick={handleLogout} className="logout-button">
-                <FaSignOutAlt className="icon" />
-                {isOpen && <span>Logout</span>}
+              <button onClick={handleLogout} className="menu-link logout-button">
+                <FaSignOutAlt className="icons" />
+                <span>Logout</span>
               </button>
             </li>
           )}
         </ul>
-      </div>
+      </nav>
+
       {isMobile && (
-        <button className="toggle-button" onClick={toggleMenu}>
-          {isOpen ? '✕' : '☰'}
-        </button>
+        <>
+          <button className={`toggle-button ${isOpen ? 'hidden' : ''}`} onClick={toggleMenu}>
+            ☰
+          </button>
+          {isOpen && <div className="sidebar-overlay" onClick={toggleMenu} />}
+        </>
       )}
     </>
   );

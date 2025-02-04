@@ -1,65 +1,78 @@
-/* Base styles */
+/* sidebar.css */
+
+:root {
+  --sidebar-width: 260px;
+  --primary-color: #2c3e50;
+  --accent-color: #3498db;
+  --hover-color: #3a506b;
+  --text-color: #ecf0f1;
+  --transition-speed: 0.3s;
+}
+
 .sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #2c3e50;
-  color: white;
   position: fixed;
   top: 0;
   left: 0;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
+  height: 100vh;
+  width: var(--sidebar-width);
+  background: var(--primary-color);
+  transition: transform var(--transition-speed) ease-in-out;
   z-index: 1000;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permet de faire défiler la sidebar si le contenu est trop long */
-}
-
-.sidebar.open {
-  transform: translateX(0);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar.closed {
   transform: translateX(-100%);
 }
 
-.sidebar h2 {
-  text-align: center;
-  margin: 20px 0;
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.sidebar-header h2 {
+  color: var(--text-color);
   font-size: 1.5rem;
-  color: #ecf0f1;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+  font-weight: 600;
   margin: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.sidebar ul li {
-  margin: 15px 0;
+.menu-items {
+  list-style: none;
+  padding: 0 1rem;
+  flex-grow: 1;
 }
 
-.sidebar ul li a, .sidebar ul li button {
+.menu-link {
   display: flex;
   align-items: center;
+  padding: 0.8rem 1.2rem;
+  color: var(--text-color);
   text-decoration: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  transition: all 0.2s ease;
+  font-family: 'Roboto', sans-serif;
 }
 
-.sidebar ul li a:hover, .sidebar ul li button:hover {
-  background-color: #34495e;
+.menu-link:hover {
+  background: var(--hover-color);
   transform: translateX(5px);
 }
 
-.sidebar ul li a .icon, .sidebar ul li button .icon {
-  margin-right: 10px;
+.menu-link .icons {
   font-size: 1.2rem;
+  margin-right: 1rem;
+  width: 25px;
+  display: flex;
+  justify-content: center;
 }
 
-.sidebar ul li button {
+.logout-button {
   background: none;
   border: none;
   width: 100%;
@@ -67,61 +80,84 @@
   cursor: pointer;
 }
 
-/* Toggle button for mobile */
 .toggle-button {
-  display: none;
   position: fixed;
   top: 20px;
   left: 20px;
-  background-color: #3498db;
+  background: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 0.8rem;
   border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
 }
 
 .toggle-button:hover {
-  background-color: #2980b9;
+  background: var(--hover-color);
 }
 
-/* Responsive styles */
+.toggle-button.hidden {
+  display: none;
+
+}
+
+.sidebar-overlay {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+  
+  .toggle-button {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%; /* La sidebar prend toute la largeur en mode mobile */
-    transform: translateX(-100%);
+    width: 80%;
+    max-width: 300px;
   }
+  
+  .menu-link {
+    padding: 0.8rem;
 
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .sidebar.closed {
-    transform: translateX(-100%);
-  }
-
-  .toggle-button {
-    display: block; /* Affiche le bouton de bascule en mode mobile */
-  }
-
-  .sidebar ul li a, .sidebar ul li button {
-    padding: 15px 20px; /* Augmente l'espacement pour un meilleur toucher sur mobile */
-  }
-
-  .sidebar ul li a .icon, .sidebar ul li button .icon {
-    font-size: 1.5rem; /* Agrandit les icônes pour les rendre plus visibles */
-  }
-
-  .sidebar h2 {
-    font-size: 1.8rem; /* Agrandit le titre pour les petits écrans */
-    margin: 30px 0; /* Augmente la marge pour un meilleur espacement */
+    
   }
 }
 
-/* Animation for sidebar */
+/* Animation */
+.slide-in {
+  animation: slideIn var(--transition-speed) ease-out;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -129,21 +165,4 @@
   to {
     transform: translateX(0);
   }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.sidebar.open {
-  animation: slideIn 0.3s forwards;
-}
-
-.sidebar.closed {
-  animation: slideOut 0.3s forwards;
 }

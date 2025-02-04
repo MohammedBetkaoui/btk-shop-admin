@@ -1,0 +1,174 @@
+.list-user-container {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* Version Desktop */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.user-table thead {
+  background: linear-gradient(45deg, #6c5ce7, #a8a4e6);
+  color: white;
+}
+
+.user-table th {
+  padding: 1.2rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.user-table td {
+  padding: 1rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Version Mobile */
+.mobile-view {
+  display: none;
+}
+
+.user-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  padding: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.username {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.user-id {
+  font-size: 0.8rem;
+  color: #6c757d;
+  background: #f1f3f5;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  padding: 0.4rem 0;
+}
+
+.label {
+  color: #6c757d;
+  font-weight: 500;
+  flex: 1;
+}
+
+.value {
+  color: #2c3e50;
+  flex: 2;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* États de chargement et erreur */
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #6c5ce7;
+  background-color: rgba(108, 92, 231, 0.1);
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+  
+  .mobile-view {
+    display: block;
+  }
+  
+  .list-user-container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .user-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-item {
+    flex-direction: column;
+  }
+  
+  .value {
+    text-align: left;
+    margin-top: 0.2rem;
+  }
+  
+  .username {
+    font-size: 1rem;
+  }
+  
+  .user-id {
+    font-size: 0.7rem;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+}
