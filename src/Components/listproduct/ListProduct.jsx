@@ -38,9 +38,7 @@ const ListProduct = () => {
     if (result.isConfirmed) {
       try {
         await axios.post('https://backend-btk-shop.onrender.com/removeproduct', { id }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
+         
         });
         setProducts(products.filter(product => product.id !== id));
         Swal.fire('Deleted!', 'The product has been deleted.', 'success');
