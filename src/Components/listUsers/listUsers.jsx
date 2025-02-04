@@ -51,13 +51,7 @@ const ListUser = () => {
     };
   }, [socket]);
 
-  const handleDelete = async (userId) => {
-    try {
-      await axios.delete(`https://backend-btk-shop.onrender.com/users/${userId}`);
-    } catch (err) {
-      setError('Échec de la suppression');
-    }
-  };
+  
 
   if (loading) return <div className="loading">Chargement...</div>;
 
@@ -75,7 +69,7 @@ const ListUser = () => {
             <th>Nom</th>
             <th>Email</th>
             <th>Inscription</th>
-            <th>Actions</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -85,14 +79,7 @@ const ListUser = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-              <td>
-                <button 
-                  onClick={() => handleDelete(user._id)}
-                  className="delete-btn"
-                >
-                  Supprimer
-                </button>
-              </td>
+             
             </tr>
           ))}
         </tbody>
@@ -100,36 +87,27 @@ const ListUser = () => {
 
       {/* Version Mobile */}
       <div className="mobile-view">
-        {users.map((user) => (
-          <div className="user-card" key={user._id}>
-            <div className="card-header">
-              <span className="username">{user.username}</span>
-              <button 
-                onClick={() => handleDelete(user._id)}
-                className="delete-btn-mobile"
-              >
-                ×
-              </button>
+      {users.map((user) => (
+        <div className="user-card" key={user._id}>
+          <div className="card-header">
+            <span className="username">{user.username}</span>
+            <span className="user-id">ID: {user._id}</span>
+          </div>
+          <div className="card-content">
+            <div className="info-item">
+              <span className="label">Email:</span>
+              <span className="value">{user.email}</span>
             </div>
-            <div className="card-content">
-              <div className="info-item">
-                <span className="label">ID:</span>
-                <span className="value">{user._id}</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Email:</span>
-                <span className="value">{user.email}</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Inscrit le:</span>
-                <span className="value">
-                  {new Date(user.createdAt).toLocaleDateString()}
-                </span>
-              </div>
+            <div className="info-item">
+              <span className="label">Inscription:</span>
+              <span className="value">
+                {new Date(user.createdAt).toLocaleDateString()}
+              </span>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
     </div>
   );
 };
