@@ -1,29 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import io from 'socket.io-client';
 import './listUsers.css';
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('https://backend-btk-shop.onrender.com', {
-      withCredentials: true,
-      transports: ['websocket']
-    });
-    
-    setSocket(newSocket);
-
-    return () => newSocket.close();
-  }, []);
-
-  useEffect(() => {
-    if (!socket) return;
-
-    const fetchInitialUsers = async () => {
+    const fetchUsers = async () => {
       try {
         const response = await axios.get('https://backend-btk-shop.onrender.com/users');
         setUsers(response.data);
@@ -34,42 +19,29 @@ const ListUser = () => {
       }
     };
 
-    socket.on('users-updated', (updatedUsers) => {
-      setUsers(updatedUsers);
-    });
+    fetchUsers();
+  }, []);
 
-    socket.on('connect_error', (err) => {
-      setError('Erreur de connexion temps réel');
-      console.error('Socket error:', err);
-    });
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
-    fetchInitialUsers();
-
-    return () => {
-      socket.off('users-updated');
-      socket.off('connect_error');
-    };
-  }, [socket]);
-
-  
-
-  if (loading) return <div className="loading">Chargement...</div>;
-
-  if (error) return <div className="error">Erreur: {error}</div>;
+  if (error) {
+    return <div className="error">Error: {error}</div>;
+  }
 
   return (
     <div className="list-user-container">
-      <h1>Gestion des Utilisateurs </h1>
+      <h1>Liste des Utilisateurs</h1>
       
       {/* Version Desktop */}
       <table className="user-table desktop-view">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nom</th>
+            <th>Nom d'utilisateur</th>
             <th>Email</th>
-            <th>Inscription</th>
-            
+            <th>Date d'inscription</th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +51,6 @@ const ListUser = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-             
             </tr>
           ))}
         </tbody>
@@ -87,27 +58,27 @@ const ListUser = () => {
 
       {/* Version Mobile */}
       <div className="mobile-view">
-      {users.map((user) => (
-        <div className="user-card" key={user._id}>
-          <div className="card-header">
-            <span className="username">{user.username}</span>
-            <span className="user-id">ID: {user._id}</span>
-          </div>
-          <div className="card-content">
-            <div className="info-item">
-              <span className="label">Email:</span>
-              <span className="value">{user.email}</span>
+        {users.map((user) => (
+          <div className="user-card" key={user._id}>
+            <div className="card-header">
+              <span className="username">{user.username}</span>
+              <span className="user-id">ID: {user._id}</span>
             </div>
-            <div className="info-item">
-              <span className="label">Inscription:</span>
-              <span className="value">
-                {new Date(user.createdAt).toLocaleDateString()}
-              </span>
+            <div className="card-content">
+              <div className="info-item">
+                <span className="label">Email:</span>
+                <span className="value">{user.email}</span>
+              </div>
+              <div className="info-item">
+                <span className="label">Inscription:</span>
+                <span className="value">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
     </div>
   );
 };
