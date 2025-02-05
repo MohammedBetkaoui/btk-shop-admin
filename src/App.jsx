@@ -19,9 +19,7 @@ const App = () => {
   return (
     <AuthProvider>
       <div className="app-container">
-      <PrivateRoute>
         <Sidebar />
-        </PrivateRoute>
         <div className="content">
           <Routes>
             <Route path="/login" element={<LoginForm />} />
