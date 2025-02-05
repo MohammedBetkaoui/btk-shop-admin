@@ -7,6 +7,34 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+.size-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.size-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.size-checkbox:hover {
+  border-color: #007bff;
+}
+
+.size-checkbox input {
+  margin-right: 8px;
+}
+
+.size-checkbox input:checked + span {
+  font-weight: bold;
+  color: #007bff;
+}
 
 
 .add-product-container h2 {

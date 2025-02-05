@@ -5,69 +5,93 @@ import './addproduct.css';
 const Addproduct = () => {
   const [product, setProduct] = useState({
     name: '',
-    category: '', // La catégorie est maintenant une chaîne de caractères
+    category: '',
     new_price: '',
     old_price: '',
     image: null,
     description: '',
+    sizes: []
   });
 
   const [imagePreview, setImagePreview] = useState(null);
   const [alert, setAlert] = useState({ message: '', type: '' });
-
-  // Référence pour l'élément input de type file
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    const { name, value, type, options } = e.target;
+    
+    if (type === 'select-multiple') {
+      const selectedOptions = Array.from(options)
+        .filter(option => option.selected)
+        .map(option => option.value);
+      setProduct(prev => ({ ...prev, [name]: selectedOptions }));
+    } else {
+      setProduct(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProduct({ ...product, image: file });
+      setProduct(prev => ({ ...prev, image: file }));
       setImagePreview(URL.createObjectURL(file));
     }
   };
 
-  // Gestionnaire de clic pour la div file-upload
   const handleFileUploadClick = () => {
-    fileInputRef.current.click(); // Déclenche le clic sur l'input file
+    fileInputRef.current.click();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    
+    // Ajout des champs au FormData
     formData.append('name', product.name);
     formData.append('category', product.category);
     formData.append('new_price', product.new_price);
     formData.append('old_price', product.old_price);
     formData.append('image', product.image);
     formData.append('description', product.description);
+    formData.append('sizes', JSON.stringify(product.sizes));
 
     try {
-      await axios.post('https://backend-btk-shop.onrender.com/addproduct', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+      const response = await axios.post(
+        'https://backend-btk-shop.onrender.com/addproduct', 
+        formData, 
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      setAlert({ 
+        message: response.data.message || 'Produit ajouté avec succès !', 
+        type: 'success' 
       });
 
-      setAlert({ message: 'Product added successfully!', type: 'success' });
-
+      // Réinitialisation du formulaire
       setProduct({
         name: '',
-        category: '', // Réinitialiser la catégorie
+        category: '',
         new_price: '',
         old_price: '',
         image: null,
         description: '',
+        sizes: []
       });
       setImagePreview(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+
     } catch (error) {
-      console.error('Error adding product:', error);
-      setAlert({ message: 'Error adding product!', type: 'error' });
+      console.error('Erreur lors de l\'ajout du produit :', error);
+      const errorMessage = error.response?.data?.message || 'Erreur lors de l\'ajout du produit !';
+      setAlert({ 
+        message: errorMessage, 
+        type: 'error' 
+      });
     }
 
     setTimeout(() => {
@@ -83,53 +107,97 @@ const Addproduct = () => {
         </div>
       )}
 
-      <h2>Product Addition Form</h2>
-      <p>Please fill out the form to add a new product to your store.</p>
+      <h2>Formulaire d'ajout de produit</h2>
+      <p>Remplissez le formulaire pour ajouter un nouveau produit à votre boutique.</p>
+      
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Product Title <span className="span">*</span></label>
-          <input type="text" name="name" value={product.name} onChange={handleChange} required />
+          <label>Nom du produit <span className="span">*</span></label>
+          <input 
+            type="text" 
+            name="name" 
+            value={product.name} 
+            onChange={handleChange} 
+            required 
+          />
         </div>
 
         <div className="form-group">
-          <label>Category <span className="span">*</span></label>
+          <label>Catégorie <span className="span">*</span></label>
           <select
             name="category"
             value={product.category}
             onChange={handleChange}
             required
           >
-            <option value="" disabled>Select a category</option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            <option value="" disabled>Choisir une catégorie</option>
+            <option value="Men">Homme</option>
+            <option value="Women">Femme</option>
+            <option value="Kids">Enfant</option>
           </select>
         </div>
 
         <div className="form-group">
-          <label>Old Price <span className="span">*</span></label>
-          <input type="number" name="old_price" value={product.old_price} onChange={handleChange} placeholder="e.g., 23" required />
-        </div>
-
-        <div className="form-group">
-          <label>New Price <span className="span">*</span></label>
-          <input type="number" name="new_price" value={product.new_price} onChange={handleChange} placeholder="e.g., 23" required />
-        </div>
-
-        <div className="form-group">
-          <label>Description <span className="span">*</span></label>
-          <textarea
-            name="description"
-            value={product.description}
-            onChange={handleChange}
-            required
-            rows="4"
-            placeholder="Enter product description"
+          <label>Ancien prix <span className="span">*</span></label>
+          <input 
+            type="number" 
+            name="old_price" 
+            value={product.old_price} 
+            onChange={handleChange} 
+            placeholder="ex: 50" 
+            required 
           />
         </div>
 
         <div className="form-group">
-          <label>Upload Product Image <span className="span">*</span></label>
+          <label>Nouveau prix <span className="span">*</span></label>
+          <input 
+            type="number" 
+            name="new_price" 
+            value={product.new_price} 
+            onChange={handleChange} 
+            placeholder="ex: 35" 
+            required 
+          />
+        </div>
+
+        {/* Remplacez le select multiple par ce bloc */}
+<div className="form-group">
+  <label>Tailles disponibles</label>
+  <div className="size-options">
+    {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => (
+      <label key={size} className="size-checkbox">
+        <input
+          type="checkbox"
+          name="sizes"
+          value={size}
+          checked={product.sizes.includes(size)}
+          onChange={(e) => {
+            const newSizes = e.target.checked
+              ? [...product.sizes, size]
+              : product.sizes.filter(s => s !== size);
+            setProduct(prev => ({ ...prev, sizes: newSizes }));
+          }}
+        />
+        <span>{size}</span>
+      </label>
+    ))}
+  </div>
+</div>
+
+        <div className="form-group">
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            rows="4"
+            placeholder="Description du produit (optionnelle)"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Image du produit <span className="span">*</span></label>
           <div className="file-upload" onClick={handleFileUploadClick}>
             <input
               type="file"
@@ -141,17 +209,17 @@ const Addproduct = () => {
               required
             />
             {imagePreview ? (
-              <img src={imagePreview} alt="Preview" className="image-preview" />
+              <img src={imagePreview} alt="Aperçu" className="image-preview" />
             ) : (
               <>
-                <span>Upload a File</span>
-                <p>Drag and drop files here</p>
+                <span>Téléverser une image</span>
+                <p>Glissez-déposez des fichiers ici</p>
               </>
             )}
           </div>
         </div>
 
-        <button className='btn' type="submit">Submit</button>
+        <button className='btn' type="submit">Ajouter le produit</button>
       </form>
     </div>
   );
