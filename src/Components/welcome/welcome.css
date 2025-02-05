@@ -1,0 +1,31 @@
+.welcome-container {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-text {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .welcome-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .shop-btn, .rating-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  

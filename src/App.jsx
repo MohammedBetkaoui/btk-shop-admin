@@ -9,6 +9,7 @@ import LoginForm from './Components/login/LoginForm';
 import { useAuth } from './context/AuthContext';
 
 import './index.css';
+import Welcome from './Components/welcome/welcome';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -47,7 +48,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/" element={<Welcome />} />
           </Routes>
         </div>
       </div>

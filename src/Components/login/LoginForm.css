@@ -64,6 +64,63 @@
     border-color: #6a11cb;
     outline: none;
   }
+  /* Loader animation */
+.loader {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Désactivation du bouton */
+.submit-btn:disabled {
+  background-color: #9a9a9a;
+  cursor: not-allowed;
+}
+/* Message d'erreur */
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+/* Champ avec erreur */
+.error-input {
+  border: 1px solid red !important;
+  background-color: #ffe6e6;
+}
+
+/* Loader animation */
+.loader {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Désactivation du bouton */
+.submit-btn:disabled {
+  background-color: #9a9a9a;
+  cursor: not-allowed;
+}
+
+
   
   .submit-btn {
     width: 100%;
