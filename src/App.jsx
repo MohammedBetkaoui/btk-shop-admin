@@ -20,7 +20,9 @@ const App = () => {
   return (
     <AuthProvider>
       <div className="app-container">
+        <PrivateRoute>
         <Sidebar />
+        </PrivateRoute>
         <div className="content">
           <Routes>
             <Route path="/login" element={<LoginForm />} />
@@ -48,7 +50,12 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={
+              <PrivateRoute>
+                <Welcome />
+              </PrivateRoute>
+              
+              } />
           </Routes>
         </div>
       </div>

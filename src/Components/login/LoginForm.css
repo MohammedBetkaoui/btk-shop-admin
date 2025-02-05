@@ -1,108 +1,112 @@
-/* LoginForm.css */
+/* LoginForm.css - Modern & Responsive */
 
-/* Base styles */
-
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    
-    animation: gradientBG 15s ease infinite;
-  }
-  
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .login-form {
-    background: linear-gradient(135deg, #92d0ff 0%, #d1d2d2 100%);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    animation: slideIn 0.5s ease-out;
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
-  .login-form h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group input:focus {
-    border-color: #6a11cb;
-    outline: none;
-  }
-  /* Loader animation */
-.loader {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+/* Background */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Glassmorphism Card */
+.login-form {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Désactivation du bouton */
-.submit-btn:disabled {
-  background-color: #9a9a9a;
-  cursor: not-allowed;
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-/* Message d'erreur */
+
+/* Header */
+.login-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+/* Input Fields */
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  color: #000000;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-group input:focus {
+  border-color: white;
+  outline: none;
+  background: rgba(122, 185, 243, 0.2);
+}
+
+/* Error Message */
 .error-message {
-  color: red;
+  color: #ff4d4d;
   font-size: 0.875rem;
   margin-top: 5px;
 }
 
-/* Champ avec erreur */
+/* Input Error */
 .error-input {
-  border: 1px solid red !important;
-  background-color: #ffe6e6;
+  border-color: #ff4d4d !important;
+  background: rgba(255, 77, 77, 0.2);
 }
 
-/* Loader animation */
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #ff8a00 0%, #e52e71 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #e52e71 0%, #ff8a00 100%);
+}
+
+/* Loader */
 .loader {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-top: 3px solid white;
   border-radius: 50%;
@@ -110,172 +114,53 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* Désactivation du bouton */
+/* Disabled Button */
 .submit-btn:disabled {
-  background-color: #9a9a9a;
+  background: #888;
   cursor: not-allowed;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-form {
+    padding: 2rem;
+  }
 
-  
+  .login-form h2 {
+    font-size: 1.75rem;
+  }
+
+  .form-group input {
+    padding: 10px;
+  }
+
   .submit-btn {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #6a11cb;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 10px;
   }
-  
-  .submit-btn:hover {
-    background-color: #2575fc;
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .login-form {
-      padding: 1.5rem;
-      margin-top: 95px;
-    }
-    .login-container{
-        padding: 0;
-        margin-top: 0;
+}
 
-        background: white;
-    }
-   
-  
-    .login-form h2 {
-      font-size: 1.75rem;
-    }
-  
-    .form-group input {
-      padding: 0.5rem;
-      margin-left: -11px;
-    }
-  
-    .submit-btn {
-      padding: 0.5rem;
-    }
+@media (max-width: 480px) {
+  .login-form {
+    padding: 1.5rem;
   }
-  
-  @media (max-width: 480px) {
-    .login-form {
-      padding: 1rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.5rem;
-    }
-  
-    .form-group input {
-      padding: 0.5rem;
-    }
-  
-    .submit-btn {
-      padding: 0.5rem;
-    }
+
+  .login-form h2 {
+    font-size: 1.5rem;
   }
-  
-  /* Specific device adjustments */
-  /* iPhone 5/SE */
-  @media (max-width: 320px) {
-    .login-form {
-      padding: 0.75rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.25rem;
-    }
-  
-    .form-group input {
-      padding: 0.4rem;
-    }
-  
-    .submit-btn {
-      padding: 0.4rem;
-    }
+
+  .form-group input {
+    padding: 8px;
   }
-  
-  /* iPhone 12 Mini */
-  @media (max-width: 375px) {
-    .login-form {
-      padding: 1rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.5rem;
-    }
-  
-    .form-group input {
-      padding: 0.5rem;
-    }
-  
-    .submit-btn {
-      padding: 0.5rem;
-    }
+
+  .submit-btn {
+    padding: 8px;
   }
-  
-  /* iPhone 13 Pro Max */
-  @media (max-width: 428px) {
-    .login-form {
-      padding: 1.5rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.75rem;
-    }
-  
-    .form-group input {
-      padding: 0.75rem;
-    }
-  
-    .submit-btn {
-      padding: 0.75rem;
-    }
-  }
-  
-  /* Samsung Galaxy S8+ */
-  @media (max-width: 360px) {
-    .login-form {
-      padding: 1rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.5rem;
-    }
-  
-    .form-group input {
-      padding: 0.5rem;
-    }
-  
-    .submit-btn {
-      padding: 0.5rem;
-    }
-  }
-  
-  /* Samsung Galaxy S20 Ultra */
-  @media (max-width: 412px) {
-    .login-form {
-      padding: 1.5rem;
-    }
-  
-    .login-form h2 {
-      font-size: 1.75rem;
-    }
-  
-    .form-group input {
-      padding: 0.75rem;
-    }
-  
-    .submit-btn {
-      padding: 0.75rem;
-    }
-  }
+}
