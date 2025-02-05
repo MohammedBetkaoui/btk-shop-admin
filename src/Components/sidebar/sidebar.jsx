@@ -8,6 +8,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { isAuthenticated, logout } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +60,7 @@ const Sidebar = () => {
               <span>List Users</span>
             </Link>
           </li>
+          
           {isAuthenticated && (
             <li>
               <button onClick={handleLogout} className="menu-link logout-button">
