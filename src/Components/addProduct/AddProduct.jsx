@@ -131,9 +131,9 @@ const Addproduct = () => {
             required
           >
             <option value="" disabled>Choisir une catégorie</option>
-            <option value="Men">Homme</option>
-            <option value="Women">Femme</option>
-            <option value="Kids">Enfant</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kid</option>
           </select>
         </div>
 
