@@ -116,6 +116,10 @@ const fetchUserCart = async (userId) => {
                   {new Date(user.createdAt).toLocaleDateString()}
                 </span>
               </div>
+              <div className="info-item">
+                   <span className="label">Articles en Panier:</span>
+                   <span className="value">{user.cart.length}</span>
+               </div>
             </div>
           </div>
         ))}
