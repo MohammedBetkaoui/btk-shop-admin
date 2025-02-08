@@ -12,7 +12,9 @@ const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://backend-btk-shop.onrender.com/users');
+        const response = await axios.get('https://backend-btk-shop.onrender.com/users',
+          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+        );
         setUsers(response.data);
         setLoading(false);
       } catch (err) {
