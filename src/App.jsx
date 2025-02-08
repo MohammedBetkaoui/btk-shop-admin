@@ -6,6 +6,7 @@ import Sidebar from './Components/sidebar/sidebar';
 import Addproduct from './Components/addProduct/AddProduct';
 import ListProduct from './Components/listproduct/ListProduct';
 import ListUser from './Components/listUsers/listUsers';
+import ListOrders from './Components/listOrders/ListOrders';
 import LoginForm from './Components/login/LoginForm';
 import { useAuth } from './context/AuthContext';
 
@@ -22,7 +23,7 @@ const App = () => {
     <AuthProvider>
       <div className="app-container">
         <PrivateRoute>
-        <Sidebar />
+          <Sidebar />
         </PrivateRoute>
         <div className="content">
           <Routes>
@@ -51,12 +52,19 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/listOrders"
+              element={
+                <PrivateRoute>
+                  <ListOrders />
+                </PrivateRoute>
+              }
+            />
             <Route path="/" element={
               <PrivateRoute>
                 <Welcome />
               </PrivateRoute>
-              
-              } />
+            } />
           </Routes>
         </div>
       </div>

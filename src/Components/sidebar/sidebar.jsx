@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaPlus, FaList, FaSignOutAlt, FaTimes } from 'react-icons/fa';
+import { FaPlus, FaList, FaSignOutAlt, FaTimes, FaShoppingCart } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import './sidebar.css';
 
@@ -58,6 +58,12 @@ const Sidebar = () => {
             <Link to="/listUsers" className="menu-link">
               <FaList className="icons" />
               <span>List Users</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/listOrders" className="menu-link">
+              <FaShoppingCart className="icons" />
+              <span>List Orders</span>
             </Link>
           </li>
           
