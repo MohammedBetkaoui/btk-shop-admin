@@ -6,6 +6,8 @@ const ListUser = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedUserCart, setSelectedUserCart] = useState(null);
+const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,9 +31,42 @@ const ListUser = () => {
   if (error) {
     return <div className="error">Error: {error}</div>;
   }
+  // Fonction de récupération du panier
+const fetchUserCart = async (userId) => {
+  try {
+    const response = await axios.get(
+      `https://backend-btk-shop.onrender.com/admin/users/cart/${userId}`,
+      { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+    );
+    setSelectedUserCart(response.data.cart);
+    setIsCartModalOpen(true);
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+  }
+};
 
   return (
+    
     <div className="list-user-container">
+      {isCartModalOpen && (
+  <div className="cart-modal">
+    <div className="modal-content">
+      <h3>Détails du Panier</h3>
+      {selectedUserCart?.map(item => (
+        <div key={item.productId} className="cart-item">
+          <img src={item.image} alt={item.name} />
+          <div>
+            <p>{item.name}</p>
+            <p>Taille: {item.size}</p>
+            <p>Quantité: {item.quantity}</p>
+            <p>Prix: {item.price}€</p>
+          </div>
+        </div>
+      ))}
+      <button onClick={() => setIsCartModalOpen(false)}>Fermer</button>
+    </div>
+  </div>
+)}
       <h1>Liste des Utilisateurs</h1>
       
       {/* Version Desktop */}
@@ -43,6 +78,8 @@ const ListUser = () => {
           <th>Nom d'utilisateur</th>
           <th>Email</th>
           <th>Date d'inscription</th>
+          <th>Articles en Panier</th>
+
         </tr>
       </thead>
       <tbody>
@@ -52,6 +89,8 @@ const ListUser = () => {
             <td>{user.username}</td>
             <td className="email-cell">{user.email}</td>
             <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+            <td>{user.cart.length}</td>
+
           </tr>
         ))}
       </tbody>
