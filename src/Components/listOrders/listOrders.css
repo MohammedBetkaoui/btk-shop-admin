@@ -12,11 +12,31 @@
   padding: 0;
 }
 
+
 body {
   background-color: var(--background-color);
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
   color: var(--text-color);
+}
+.confirm-button, .deliver-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.confirm-button:hover, .deliver-button:hover {
+  background-color: #011a5e;
+}
+
+.final-status {
+  margin-top: 1rem;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 p{
   color: black;
