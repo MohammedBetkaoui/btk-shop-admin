@@ -9,6 +9,8 @@ import ListUser from './Components/listUsers/listUsers';
 import ListOrders from './Components/listOrders/ListOrders';
 import LoginForm from './Components/login/LoginForm';
 import { useAuth } from './context/AuthContext';
+import EditProduct from './Components/EditProduct/editProduct';
+
 
 import './index.css';
 import Welcome from './Components/welcome/welcome';
@@ -65,6 +67,14 @@ const App = () => {
                 <Welcome />
               </PrivateRoute>
             } />
+            <Route
+                  path="/edit-product/:id"
+                  element={
+                      <PrivateRoute>
+                          <EditProduct />
+                      </PrivateRoute>
+                  }
+/>
           </Routes>
         </div>
       </div>

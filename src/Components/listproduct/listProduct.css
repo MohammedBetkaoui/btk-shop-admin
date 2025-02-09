@@ -11,6 +11,24 @@
   margin-bottom: 2rem;
   font-weight: 600;
 }
+/* Ajouter ces styles à listProduct.css */
+.product-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
 
 .product-grid {
   display: grid;

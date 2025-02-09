@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import './listProduct.css';
+import { Link } from 'react-router-dom';
+
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
@@ -67,9 +69,14 @@ const ListProduct = () => {
               <p><strong>New Price:</strong> {product.new_price}</p>
               <p><strong>Old Price:</strong> {product.old_price}</p>
             </div>
-            <button className="delete-button" onClick={() => handleDelete(product.id)}>
-              Delete
-            </button>
+            <div className="product-actions">
+    <Link to={`/edit-product/${product.id}`} className="edit-button">
+        Edit
+    </Link>
+    <button className="delete-button" onClick={() => handleDelete(product.id)}>
+        Delete
+    </button>
+</div>
           </div>
         ))}
       </div>
