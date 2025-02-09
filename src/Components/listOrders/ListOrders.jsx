@@ -15,17 +15,22 @@ const ListOrders = () => {
         const response = await axios.get('https://backend-btk-shop.onrender.com/order', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        setOrders(response.data.orders);
+        
+        // Tri des commandes par date décroissante
+        const sortedOrders = [...response.data.orders].sort((a, b) => 
+          new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        
+        setOrders(sortedOrders);
         setLoading(false);
       } catch (err) {
         setError(err.message);
         setLoading(false);
       }
     };
-
+  
     fetchOrders();
   }, []);
-
   if (loading) {
     return <div className="loading">Chargement...</div>;
   }
@@ -56,7 +61,7 @@ const ListOrders = () => {
                   {format(new Date(order.createdAt), 'dd MMMM yyyy, HH:mm', { locale: fr })}
                 </p>
                 <p className="total-amount">
-                  Total : {order.totalAmount.toFixed(2)} Dz
+                  Total : {order.totalAmount.toFixed(2)} 
                 </p>
               </div>
 
@@ -72,13 +77,13 @@ const ListOrders = () => {
                     <div className="product-info">
                       <h5 className="product-name">{product.name}</h5>
                       <div className="product-details">
-                        <span>Prix unitaire : {product.price.toFixed(2)} Dz</span>
+                        <span>Prix unitaire : {product.price.toFixed(2)} </span>
                         <span>Quantité : {product.quantity}</span>
                         <span>Taille : {product.size}</span>
                       </div>
                     </div>
                     <div className="product-total">
-                      {(product.price * product.quantity).toFixed(2)} Dz
+                      {(product.price * product.quantity).toFixed(2)} 
                     </div>
                   </div>
                 ))}
